@@ -11,6 +11,10 @@ const paths = {
   tests: path.join(__dirname, 'lib/**/test/test.js')
 }
 
+const handleError = () => {
+  this.emit('end')
+}
+
 const cleanTask = () => {
   const { dest } = paths
   return del(dest)
@@ -38,7 +42,10 @@ gulp.task('babel', babelTask)
 
 const mochaTask = () => {
   const { tests } = paths
-  return gulp.src(tests, { read: false }).pipe(mocha({ reporter: 'nyan' }))
+  return gulp
+    .src(tests, { read: false })
+    .pipe(mocha({ reporter: 'nyan', exit: true }))
+    .on('error', () => handleError.bind(this))
 }
 gulp.task('test', mochaTask)
 
