@@ -1,6 +1,6 @@
-const { describe, it } = require('mocha')
-const { expect } = require('chai')
-const { sayFizzBuzz } = require('../index')
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+import { sayFizzBuzz } from '../index'
 
 describe('FizzBuzz Example', () => {
   describe('sayFizzBuzz', () => {
