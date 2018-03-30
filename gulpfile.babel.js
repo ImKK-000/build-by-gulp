@@ -40,7 +40,7 @@ const mochaTask = () => {
   const { tests } = paths
   return gulp
     .src(tests, { read: false })
-    .pipe(mocha({ reporter: 'spec' }))
+    .pipe(mocha({ reporter: 'spec', compilers: 'js:babel-core/register' }))
     .on('error', () => false)
 }
 gulp.task('test', mochaTask)
