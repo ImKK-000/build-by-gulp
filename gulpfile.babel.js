@@ -40,7 +40,7 @@ const mochaTask = () => {
   const { tests } = paths
   return gulp
     .src(tests, { read: false })
-    .pipe(mocha({ reporter: 'nyan', exit: true }))
+    .pipe(mocha({ reporter: 'spec' }))
     .on('error', () => false)
 }
 gulp.task('test', mochaTask)
@@ -51,5 +51,7 @@ const watchTask = () => {
 }
 gulp.task('watch', watchTask)
 
-const buildTask = gulp.series(cleanTask, eslintTask, babelTask, mochaTask)
+const tasks = [cleanTask, eslintTask, babelTask, mochaTask]
+const buildTask = gulp.series(tasks)
 gulp.task('build', buildTask)
+gulp.task('default', buildTask)
